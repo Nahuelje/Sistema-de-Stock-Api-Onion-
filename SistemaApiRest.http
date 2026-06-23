@@ -1,0 +1,6 @@
+@SistemaApiRest_HostAddress = http://localhost:5111
+
+GET {{SistemaApiRest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

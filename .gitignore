@@ -1,0 +1,40 @@
+## .NET / ASP.NET Core
+
+# Carpetas de compilación
+bin/
+obj/
+
+# Archivos de usuario de Visual Studio / Rider
+*.user
+*.suo
+.vs/
+.idea/
+*.userprefs
+
+# Archivos de configuración local (contienen contraseñas)
+appsettings.Development.json
+
+# Base de datos SQLite (si se usa)
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+logs/
+
+# NuGet
+.nuget/
+packages/
+
+# Cobertura de tests
+coverage/
+*.coverage
+*.coveragexml
+
+# Publicación
+publish/
+
+# OS
+.DS_Store
+Thumbs.db
