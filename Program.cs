@@ -1,34 +1,38 @@
 using Microsoft.EntityFrameworkCore;
+using SistemaApiRest.Aplicacion.Servicios.Categoria;
+using SistemaApiRest.Aplicacion.Servicios.Producto;
+using SistemaApiRest.Dominio.Interfaces;
+using SistemaApiRest.Persistencia.Contexto;
+using SistemaApiRest.Persistencia.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ────────────────────────────────────────────────────────────
-// REGISTRO DE DEPENDENCIAS
-// Acá vas a agregar tus repositorios y servicios a medida que
-// los crees en las capas Persistencia y Aplicacion.
-// ────────────────────────────────────────────────────────────
+// Base de datos
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    ));
 
-// TODO: registrar DbContext cuando crees AppDbContext
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseMySql(
-//         builder.Configuration.GetConnectionString("DefaultConnection"),
-//         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
-//     ));
+// Repositorios
+builder.Services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEf>();
+builder.Services.AddScoped<IRepositorioProducto, RepositorioProductoEf>();
 
-// TODO: registrar repositorios
-// builder.Services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEf>();
-// builder.Services.AddScoped<IRepositorioProducto, RepositorioProductoEf>();
+// Servicios de Categoria
+builder.Services.AddScoped<CrearCategoriaService>();
+builder.Services.AddScoped<ObtenerCategoriasService>();
+builder.Services.AddScoped<ObtenerCategoriaService>();
+builder.Services.AddScoped<EliminarCategoriaService>();
 
-// TODO: registrar servicios de aplicación
-// builder.Services.AddScoped<CrearCategoriaService>();
-// ...
+// Servicios de Producto
+builder.Services.AddScoped<CrearProductoService>();
+builder.Services.AddScoped<ObtenerTodosProductosService>();
+builder.Services.AddScoped<ObtenerProductoService>();
+builder.Services.AddScoped<EliminarProductoService>();
+builder.Services.AddScoped<ModificarStockService>();
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-
-// ────────────────────────────────────────────────────────────
-// PIPELINE HTTP
-// ────────────────────────────────────────────────────────────
 
 var app = builder.Build();
 

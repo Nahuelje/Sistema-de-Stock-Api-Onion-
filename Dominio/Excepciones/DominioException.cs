@@ -1,3 +1,5 @@
+using SistemaApiRest.Dominio.Excepciones;
+
 namespace SistemaApiRest.Dominio.Excepciones
 {
     public class DominioException : Exception

@@ -1,4 +1,5 @@
 using SistemaApiRest.Dominio.Entidades;
+namespace SistemaApiRest.Dominio.Interfaces;
 
 public interface IRepositorioCategoria
 {
