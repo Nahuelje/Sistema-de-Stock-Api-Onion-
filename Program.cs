@@ -5,17 +5,17 @@ using SistemaApiRest.Persistencia.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Repositorios en memoria — Singleton para que los datos persistan en la sesión
+
 builder.Services.AddSingleton<IRepositorioCategoria, RepositorioCategoriaEnMemoria>();
 builder.Services.AddSingleton<IRepositorioProducto, RepositorioProductoEnMemoria>();
 
-// Servicios de Categoria
+
 builder.Services.AddScoped<CrearCategoriaService>();
 builder.Services.AddScoped<ObtenerCategoriasService>();
 builder.Services.AddScoped<ObtenerCategoriaService>();
 builder.Services.AddScoped<EliminarCategoriaService>();
 
-// Servicios de Producto
+
 builder.Services.AddScoped<CrearProductoService>();
 builder.Services.AddScoped<ObtenerTodosProductosService>();
 builder.Services.AddScoped<ObtenerProductoService>();
