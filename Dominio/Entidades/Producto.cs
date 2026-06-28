@@ -12,6 +12,12 @@ namespace SistemaApiRest.Dominio.Entidades
 
         public Producto() { Nombre = ""; }
 
+        public void EstablecerId(int id)
+        {
+            if (id <= 0) throw new DominioException("El Id del producto debe ser positivo.");
+            Id = id;
+        }
+
         public Producto(string nombre, decimal precio, int stock, int categoriaId)
         {
             if (string.IsNullOrWhiteSpace(nombre))

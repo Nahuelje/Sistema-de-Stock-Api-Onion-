@@ -1,22 +1,13 @@
-using Microsoft.EntityFrameworkCore;
 using SistemaApiRest.Aplicacion.Servicios.Categoria;
 using SistemaApiRest.Aplicacion.Servicios.Producto;
 using SistemaApiRest.Dominio.Interfaces;
-using SistemaApiRest.Persistencia.Contexto;
 using SistemaApiRest.Persistencia.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Base de datos
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
-    ));
-
-// Repositorios
-builder.Services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEf>();
-builder.Services.AddScoped<IRepositorioProducto, RepositorioProductoEf>();
+// Repositorios en memoria — Singleton para que los datos persistan en la sesión
+builder.Services.AddSingleton<IRepositorioCategoria, RepositorioCategoriaEnMemoria>();
+builder.Services.AddSingleton<IRepositorioProducto, RepositorioProductoEnMemoria>();
 
 // Servicios de Categoria
 builder.Services.AddScoped<CrearCategoriaService>();
